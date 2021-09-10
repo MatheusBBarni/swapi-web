@@ -16,6 +16,8 @@
 	"reason": { "react-jsx": 3 },
   "bs-dependencies": [
 		"@rescript/react", 
-		"@rescriptbr/ancestor"
+		"@rescriptbr/ancestor",
+		"rescript-request",
+		"rescript-future"
 	]
 }
