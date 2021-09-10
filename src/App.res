@@ -7,6 +7,7 @@ Emotion.injectGlobal(`
     --black: #1c1e22;
     --text-color: #c8c8c8;
     --bg-color: #272b30;
+    --blue: #005dd0;
   }
   * {
     font-family: var(--font);
