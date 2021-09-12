@@ -1,11 +1,6 @@
 module Response = {
-  type t<'data>
-  @send external json: t<'data> => Promise.t<'data> = "json"
+  type t
+  @send external json: t => Js.Promise.t<Js.Json.t> = "json"
 }
 
-@val @scope("globalThis")
-external fetch: (
-  string,
-  'params,
-) => Promise.t<Response.t<{"token": Js.Nullable.t<string>, "error": Js.Nullable.t<string>}>> =
-  "fetch"
+@val external fetch: (string, {..}) => Js.Promise.t<Response.t> = "fetch"

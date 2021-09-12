@@ -1,5 +1,7 @@
 open Models
 open Ancestor.Default
+open Promise
+open Fetch
 
 @react.component
 let make = () => {
@@ -20,34 +22,9 @@ let make = () => {
     //   ~responseType=(JsonAsAny: Request.responseType<swapiResponse<characterModel>>),
     //   (),
     // )
-    Fetch.fetch("https://reqres.in/api/login", params)
-    ->then(res => {
-      Response.json(res)
-    })
-    ->then(data => {
-      // Notice our pattern match on the "error" / "token" fields
-      // to determine the final result. Be aware that this logic highly
-      // depends on the backend specificiation.
-      switch Js.Nullable.toOption(data["error"]) {
-      | Some(msg) => Error(msg)
-      | None =>
-        switch Js.Nullable.toOption(data["token"]) {
-        | Some(token) => Ok(token)
-        | None => Error("Didn't return a token")
-        }
-      }->resolve
-    })
-    ->catch(e => {
-      let msg = switch e {
-      | JsError(err) =>
-        switch Js.Exn.message(err) {
-        | Some(msg) => msg
-        | None => ""
-        }
-      | _ => "Unexpected error occurred"
-      }
-      Error(msg)->resolve
-    })
+    Fetch.fetch(`${Constants.apiUrl}/people/?search=${characterName}`, params)->then(response =>
+      Fetch.Response.json(response)
+    )
   }
 
   let handleInputChange = event => {
@@ -60,7 +37,9 @@ let make = () => {
     let key = ReactEvent.Keyboard.key(event)
     if key === "Enter" {
       getCharacterByName()
+      ()
     }
+    ()
   }
 
   let loadingElement = if loading {
