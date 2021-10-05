@@ -17,8 +17,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "re:build": "rescript",
-    "re:start": "rescript build -w"
+    "re:build": "yarn re:clean && rescript",
+    "re:start": "rescript build -w",
+    "re:clean": "rm **/*.bs.js"
   },
   "eslintConfig": {
     "extends": [
