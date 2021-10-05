@@ -3,11 +3,25 @@ open Ancestor.Default
 @react.component
 let make = () => {
   let (characterName, setCharacterName) = React.useState(_ => "")
+  let (loading, setLoading) = React.useState(_ => false)
 
   let handleInputChange = event => {
     let value = ReactEvent.Form.currentTarget(event)["value"]
 
     setCharacterName(_ => value)
+  }
+
+  let handleKeyPress = event => {
+    let key = ReactEvent.Keyboard.key(event)
+    if key === "Enter" {
+      getCharacterByName()
+    }
+  }
+
+  let loadingElement = if loading {
+    <Base width=[#xs(100->#px)] height=[#xs(100->#px)] mt=[xs(2)] src=Assets.loadingGif tag=#img />
+  } else {
+    <> </>
   }
 
   <Box
@@ -31,6 +45,7 @@ let make = () => {
       placeholder="Type a name of SW character"
       tag=#input
       value=characterName
+      onKeyPress=handleKeyPress
       onChange=handleInputChange
     />
   </Box>

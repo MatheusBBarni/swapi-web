@@ -9306,17 +9306,10 @@ requires-port@^1.0.0:
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
   integrity sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
 
-rescript-future@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/rescript-future/-/rescript-future-2.0.0.tgz#837cce5a82a965bd1172ffbf0cc814467c643019"
-  integrity sha512-ZseLHgO/hKJQAMji+y0f8mFyB7UhVPc/tZj4iBf389D8Ko1XmhUzVZJYSYqMUHxLDsELhwm/Ian4MPGaQP7d6Q==
-
-rescript-request@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/rescript-request/-/rescript-request-3.0.1.tgz#88aa36b847355c9d2fc7510dd17d98a9633ca694"
-  integrity sha512-u8VLEysG40vcfRFHFGiR+k8wUQujSkdhD72j8AfpLQs+EUzonBIT+ZrQ1l7A2cdMXWcx6U/PmUijnB2cuJ0zDw==
-  dependencies:
-    rescript-future "^2.0.0"
+rescript-react-fetch@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/rescript-react-fetch/-/rescript-react-fetch-0.1.0.tgz#ff48babc56befedcb08de99078dc25cbcd0e30ee"
+  integrity sha512-W+TMnUU+Mkc23w9HYVeIjhIloEjlifWlEMNltAPGvc5XRaV7f/wG9DADjWybDu54EIlFYjZXXKHytp7b268PMQ==
 
 rescript@^9.1.4:
   version "9.1.4"

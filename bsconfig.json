@@ -2,22 +2,23 @@
 	"name": "swapi-web",
 	"sources": [
 		{
-		"dir": "src",
-		"subdirs": true
+			"dir": "src",
+			"subdirs": true
 		}
 	],
 	"package-specs": [
 		{
-		"module": "es6",
-		"in-source": true
+			"module": "es6",
+			"in-source": true
 		}
 	],
 	"suffix": ".bs.js",
-	"reason": { "react-jsx": 3 },
-  "bs-dependencies": [
-		"@rescript/react", 
+	"reason": {
+		"react-jsx": 3
+	},
+	"bs-dependencies": [
+		"@rescript/react",
 		"@rescriptbr/ancestor",
-		"rescript-request",
-		"rescript-future"
+		"rescript-react-fetch"
 	]
 }
