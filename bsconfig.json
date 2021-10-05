@@ -13,12 +13,17 @@
 		}
 	],
 	"suffix": ".bs.js",
+	"bsc-flags": [
+		"-bs-g",
+		"-bs-super-errors"
+	],
 	"reason": {
 		"react-jsx": 3
 	},
 	"bs-dependencies": [
 		"@rescript/react",
 		"@rescriptbr/ancestor",
-		"rescript-react-fetch"
+		"@ryyppy/rescript-promise",
+		"@rescriptbr/react-query"
 	]
 }

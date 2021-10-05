@@ -1,11 +1,3 @@
-type swapiResponse<'a> = {
-  "ok": bool,
-  "count": int,
-  "next": string,
-  "previous": string,
-  "results": 'a,
-}
-
 type characterModel = {
   "name": string,
   "height": string,
@@ -25,4 +17,10 @@ type characterModel = {
   "url": string,
 }
 
-type characterResponse = swapiResponse<characterModel>
+type swapiResponse<'a> = {
+  "ok": bool,
+  "count": int,
+  "next": string,
+  "previous": string,
+  "results": 'a,
+}
