@@ -1,3 +1,1 @@
-module Constants = {
-  let apiUrl = "https://swapi.dev/api"
-}
+let apiUrl = "https://swapi.dev/api"
