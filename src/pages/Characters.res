@@ -3,21 +3,26 @@ open Ancestor.Default
 
 @react.component
 let make = () => {
-  let (result, setResult) = React.useState(_ => Js.null)
   let (characterName, setCharacterName) = React.useState(_ => "yoda")
 
+  /*
+  let (result, setResult) = React.useState(_ => Empty)
   let handleKeyPress = event => {
     let key = ReactEvent.Keyboard.key(event)
     if key === "Enter" {
-      setResult(CharacterHooks.useCharacterByName(characterName))
+      Fetch.fetch(`${Constants.apiUrl}/people/?search=${characterName}`, {"method": "GET"})
+      ->Promise.then(Fetch.Response.json)
     }
   }
+ */
 
   let handleInputChange = event => {
     let value = ReactEvent.Form.currentTarget(event)["value"]
 
     setCharacterName(_ => value)
   }
+
+  let result = CharacterHook.useCharacterByName(characterName)
 
   <Box
     mt=[xs(4)]
@@ -63,7 +68,7 @@ let make = () => {
     | Data(characters) => <>
         {characters->map((character, key) => {
           <Typography key color=[xs(#hex("var(--sw-yellow)"))] fontSize=[xs(#rem(2.))] tag=#h1>
-            {`aaa`->s}
+            {character.name->s}
           </Typography>
         })}
       </>
