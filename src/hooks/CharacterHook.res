@@ -7,21 +7,28 @@ let handleFetch = (name: string): Promise.t<Models.swapiResponse<array<Models.ch
     Fetch.Response.json,
   )
 
-let useCharacterByName = (name: string): Models.fetchResult<array<Models.characterModel>> => {
-  let result = useQuery(
-    queryOptions(
-      //
-      ~queryFn=_ => handleFetch(name),
-      ~queryKey="characters",
-      ~refetchOnWindowFocus=refetchOnWindowFocus(#bool(false)),
-      (),
-    ),
-  )
+let useCharacter = (): Models.fetchResult<array<Models.characterModel>> => {
+  let (result, setResult) = React.useState(_ => Empty)
 
-  switch result {
+  let fetchCharacters = (name: string) => {
+    let response = useQuery(
+      queryOptions(
+        ~queryFn=_ => handleFetch(name),
+        ~queryKey="characters",
+        ~refetchOnWindowFocus=refetchOnWindowFocus(#bool(false)),
+        (),
+      ),
+    )
+    setResult(_ => response)
+    None
+  }
+
+  let characters = switch result {
   | {data: None, isLoading: false, isError: false} => Empty
   | {isLoading: true} => Loading
   | {data: Some(response), isLoading: false, isError: false} => Data(response.results)
   | _ => Error
   }
+
+  {characters: characters, fetchCharacters: fetchCharacters}
 }

@@ -3,26 +3,28 @@ open Ancestor.Default
 
 @react.component
 let make = () => {
+  let {characters, fetchCharacters} = CharacterHook.useCharacter()
+
   let (characterName, setCharacterName) = React.useState(_ => "yoda")
 
   /*
   let (result, setResult) = React.useState(_ => Empty)
+  
+ */
+
   let handleKeyPress = event => {
     let key = ReactEvent.Keyboard.key(event)
     if key === "Enter" {
-      Fetch.fetch(`${Constants.apiUrl}/people/?search=${characterName}`, {"method": "GET"})
-      ->Promise.then(Fetch.Response.json)
+      fetchCharacters(characterName)
     }
   }
- */
 
   let handleInputChange = event => {
     let value = ReactEvent.Form.currentTarget(event)["value"]
 
     setCharacterName(_ => value)
-  }
 
-  let result = CharacterHook.useCharacterByName(characterName)
+  }
 
   <Box
     mt=[xs(4)]
@@ -50,9 +52,10 @@ let make = () => {
       placeholder="Type a name of SW character and press ENTER"
       tag=#input
       value=characterName
+      onKeyPress=handleKeyPress
       onChange=handleInputChange
     />
-    {switch result {
+    {switch characters {
     | Loading =>
       <Base
         width=[#xs(100->#px)] height=[#xs(100->#px)] mt=[xs(2)] src=Assets.loadingGif tag=#img
