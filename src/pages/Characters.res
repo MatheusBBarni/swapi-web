@@ -23,7 +23,6 @@ let make = () => {
     let value = ReactEvent.Form.currentTarget(event)["value"]
 
     setCharacterName(_ => value)
-
   }
 
   <Box

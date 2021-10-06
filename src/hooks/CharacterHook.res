@@ -1,5 +1,16 @@
 open Constants
 
+type fetchResult =
+  | Loading
+  | Error
+  | Empty
+  | Data(array<Models.characterModel>)
+
+type hookResult = {
+  characters: fetchResult,
+  fetchCharacters: string => unit,
+}
+
 let {useQuery, queryOptions, refetchOnWindowFocus} = module(ReactQuery)
 
 let handleFetch = (name: string): Promise.t<Models.swapiResponse<array<Models.characterModel>>> =>
@@ -7,10 +18,10 @@ let handleFetch = (name: string): Promise.t<Models.swapiResponse<array<Models.ch
     Fetch.Response.json,
   )
 
-let useCharacter = (): Models.fetchResult<array<Models.characterModel>> => {
+let useCharacter = (): hookResult => {
   let (result, setResult) = React.useState(_ => Empty)
 
-  let fetchCharacters = (name: string) => {
+  let fetchCharacters = name => {
     let response = useQuery(
       queryOptions(
         ~queryFn=_ => handleFetch(name),
@@ -19,16 +30,22 @@ let useCharacter = (): Models.fetchResult<array<Models.characterModel>> => {
         (),
       ),
     )
-    setResult(_ => response)
-    None
+    setResult(_ =>
+      switch response {
+      | {data: None, isLoading: false, isError: false} => Empty
+      | {isLoading: true} => Loading
+      | {data: Some(response), isLoading: false, isError: false} => Data(response.results)
+      | _ => Error
+      }
+    )
   }
 
-  let characters = switch result {
-  | {data: None, isLoading: false, isError: false} => Empty
-  | {isLoading: true} => Loading
-  | {data: Some(response), isLoading: false, isError: false} => Data(response.results)
+  /* let characters = switch result {
+  | Data(charactersResponse) => Data(charactersResponse)
+  | Loading => Loading
+  | Empty => Empty
   | _ => Error
-  }
+  }*/
 
-  {characters: characters, fetchCharacters: fetchCharacters}
+  {characters: result, fetchCharacters: fetchCharacters}
 }

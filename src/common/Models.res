@@ -1,9 +1,3 @@
-type fetchResult<'a> =
-  | Loading
-  | Error
-  | Empty
-  | Data('a)
-
 type characterModel = {
   name: string,
   height: string,
