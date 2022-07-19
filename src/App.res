@@ -18,9 +18,7 @@ Emotion.injectGlobal(`
   }
 `)
 
-let client = ReactQuery.Provider.createClient()
-
 @react.component
 let make = () => {
-  <ReactQuery.Provider client> <Header /> <Routes /> </ReactQuery.Provider>
+  <><Header /> <Routes /></>
 }

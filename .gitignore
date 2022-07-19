@@ -58,3 +58,5 @@ lib/bs
 /website/node_modules/
 
 .DS_STORE
+
+/lib/

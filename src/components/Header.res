@@ -8,7 +8,7 @@ let make = () => {
     display=[xs(#flex)]
     alignItems=[xs(#center)]
     className={Emotion.css({
-      "font-family": "var(--font)",
+      "fontFamily": "var(--font)",
     })}>
     <Typography color=[xs(#hex("var(--sw-yellow)"))] fontSize=[xs(#rem(2.))] tag=#h1>
       {React.string(`SWAPI`)}

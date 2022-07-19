@@ -1,18 +1,30 @@
-open Render
-open Ancestor.Default
+open Models
 open Promise
-open Fetch
+open Ancestor.Default
+open Render
 
 @react.component
 let make = () => {
-  let {characters, fetchCharacters} = CharacterHook.useCharacter()
+  let (characterName, setCharacterName) = React.useState(_ => "")
+  let (characters, setCharacters) = React.useState(_ => Empty)
 
-  let (characterName, setCharacterName) = React.useState(_ => "yoda")
-
-  /*
-  let (result, setResult) = React.useState(_ => Empty)
-  
- */
+  let fetchCharacters = name => {
+    setCharacters(_ => Loading)
+    Axios.get(`${Constants.apiUrl}/people/?search=${name}`)
+      ->then(response => {
+        let result = response.data.results
+        switch result {
+          | [] => setCharacters(_ => Empty)
+          | _ => setCharacters(_ => Data(result))
+        }
+        resolve()
+      })
+      ->catch(_ => {
+        setCharacters(_ => Error)
+        resolve()
+      })
+      ->ignore
+  }
 
   let handleKeyPress = event => {
     let key = ReactEvent.Keyboard.key(event)
@@ -64,7 +76,7 @@ let make = () => {
       />
     | Empty =>
       <Typography color=[xs(#hex("var(--sw-yellow)"))] fontSize=[xs(#rem(2.))] tag=#h1>
-        {React.string(`${characterName} not found`)}
+        {"Not found"->s}
       </Typography>
     | Error =>
       <Typography color=[xs(#hex("var(--sw-yellow)"))] fontSize=[xs(#rem(2.))] tag=#h1>

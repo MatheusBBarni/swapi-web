@@ -24,3 +24,11 @@ type swapiResponse<'a> = {
   previous: string,
   results: 'a,
 }
+
+type axiosResponse<'a> = {
+  status: int,
+  statusText: string,
+  data: swapiResponse<'a>,
+}
+
+type characters = Empty | Loading | Error | Data(array<characterModel>)

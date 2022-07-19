@@ -23,7 +23,6 @@
 	"bs-dependencies": [
 		"@rescript/react",
 		"@rescriptbr/ancestor",
-		"@ryyppy/rescript-promise",
-		"@rescriptbr/react-query"
+		"@ryyppy/rescript-promise"
 	]
 }

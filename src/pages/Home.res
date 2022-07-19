@@ -5,7 +5,7 @@ module Text = {
   let make = (~color: string, ~children, ~mb=0, ~mt=0) => {
     <Typography
       className={Emotion.css({
-        "font-family": "var(--font)",
+        "fontFamily": "var(--font)",
         "filter": "brightness(1.2)",
       })}
       color=[xs(#hex(color))]

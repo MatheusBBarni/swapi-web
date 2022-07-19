@@ -1,0 +1,1 @@
+@module("axios") external get: string => Promise.t<Models.axiosResponse<'a>> = "get"

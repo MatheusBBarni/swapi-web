@@ -3,7 +3,7 @@ open Ancestor.Default
 module Styles = {
   open Emotion
   let container = css({
-    "font-family": "var(--font)",
+    "fontFamily": "var(--font)",
     "cursor": "pointer",
   })
 }
