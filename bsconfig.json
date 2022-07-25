@@ -15,7 +15,8 @@
 	"suffix": ".bs.js",
 	"bsc-flags": [
 		"-bs-g",
-		"-bs-super-errors"
+		"-bs-super-errors",
+		"-open ReScriptJs"
 	],
 	"reason": {
 		"react-jsx": 3
@@ -23,6 +24,7 @@
 	"bs-dependencies": [
 		"@rescript/react",
 		"@rescriptbr/ancestor",
-		"@ryyppy/rescript-promise"
+		"@ryyppy/rescript-promise",
+		"rescript-js"
 	]
 }
